@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "at.yedel.fontrast.mixin",
+  "compatibilityLevel": "${mixinJava}",
+  "client": [
+
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

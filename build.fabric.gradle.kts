@@ -42,7 +42,7 @@ dependencies {
 
 loom {
 	accessWidenerPath = sc.process(
-		rootProject.file("src/main/resources/advantimations.classtweaker"),
+		rootProject.file("src/main/resources/fontrast.classtweaker"),
 		"build/processed.classtweaker"
 	)
 	runConfigs.all {
@@ -72,7 +72,7 @@ tasks {
 		filesMatching(listOf("fabric.mod.json")) { expand(props) }
 
 		val mixinJava = "JAVA_${javaVersion.majorVersion}"
-		filesMatching("advantimations.mixins.json5") { expand("mixinJava" to mixinJava) }
+		filesMatching("fontrast.mixins.json5") { expand("mixinJava" to mixinJava) }
 
         outputs.upToDateWhen { false }
 	}
@@ -98,7 +98,7 @@ publishMods {
 	modrinth {
 		displayName.set("${project.version.toString()} for Fabric ${sc.current.version}")
 		accessToken = System.getenv("MODRINTH_TOKEN")
-		projectId.set("c0aI2COX")
+		projectId.set("U3ihDy6v")
 		environment = CLIENT_ONLY
 		projectDescription = modrinthReadme
 		if (rangedVersion) {

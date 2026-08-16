@@ -1,33 +1,32 @@
 modLoader = "javafml"
 loaderVersion = "[1,)"
 license = "${license}"
-issueTrackerURL = "https://github.com/Yedelo/Advantimations/issues"
+issueTrackerURL = "https://github.com/Yedelo/Fontrast/issues"
 
 [[mods]]
-modId = "advantimations"
+modId = "fontrast"
 version = "${version}"
-displayName = "Advantimations"
-description = "Client-side mod to cancel animations"
-logoFile = "assets/advantimations/advantimations.png"
+displayName = "Fontrast"
+description = "Adds numerous ways to customize the look of text"
+logoFile = "assets/fontrast/logo/fontrast.png"
 logoBlur = false
-credits = "thebaum64 for original sword texture in icon"
 authors = "Yedel"
-displayURL = "https://modrinth.com/mod/advantimations/"
+displayURL = "https://modrinth.com/mod/fontrast/"
 
 [[mixins]]
-config = "advantimations.mixins.json5"
+config = "fontrast.mixins.json5"
 
-[features.advantimations]
+[features.fontrast]
 javaVersion = "${java}"
 
-[[dependencies.advantimations]]
+[[dependencies.fontrast]]
 modId = "neoforge"
 versionRange = "${neoforge}"
 
-[[dependencies.advantimations]]
+[[dependencies.fontrast]]
 modId = "minecraft"
 versionRange = "${minecraft}"
 
-[[dependencies.advantimations]]
+[[dependencies.fontrast]]
 modId = "yet_another_config_lib_v3"
 versionRange = "${yacl}"

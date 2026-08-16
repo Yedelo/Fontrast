@@ -1,19 +1,19 @@
 /*? if fabric {*/
 
-package at.yedel.advantimations.utils;
+package at.yedel.fontrast.utils;
 
 
 
-import at.yedel.advantimations.config.AdvantimationsConfig;
+import at.yedel.fontrast.config.FontrastConfig;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 
 
 
-public class AdvantimationsModMenu implements ModMenuApi {
+public class FontrastModMenu implements ModMenuApi {
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
-        return AdvantimationsConfig::getScreen;
+        return FontrastConfig::getScreen;
     }
 }
 

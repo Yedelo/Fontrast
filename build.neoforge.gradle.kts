@@ -38,10 +38,8 @@ dependencies {
 neoForge {
 	version = sc.properties["versions.neoforge"]
 
-	interfaceInjectionData.from("../../neoforge.injections.json")
-
 	mods {
-		register("advantimations") {
+		register("fontrast") {
 			sourceSet(sourceSets.main.get())
 		}
 	}
@@ -61,7 +59,7 @@ tasks {
 			set(key, value)
 		}
 		exclude("fabric.mod.json")
-		exclude("advantimations.classtweaker")
+		exclude("fontrast.classtweaker")
 
 		fun target(version: String) = "[$version,)"
 		val props = buildMap {
@@ -77,7 +75,7 @@ tasks {
 		filesMatching(listOf("META-INF/neoforge.mods.toml")) { expand(props) }
 
 		val mixinJava = "JAVA_${javaVersion.majorVersion}"
-		filesMatching("advantimations.mixins.json5") { expand("mixinJava" to mixinJava) }
+		filesMatching("fontrast.mixins.json5") { expand("mixinJava" to mixinJava) }
 
         outputs.upToDateWhen { false }
 	}
@@ -103,7 +101,7 @@ publishMods {
 	modrinth {
 		displayName.set("${project.version.toString()} for NeoForge ${sc.current.version}")
 		accessToken = System.getenv("MODRINTH_TOKEN")
-		projectId.set("c0aI2COX")
+		projectId.set("U3ihDy6v")
 		environment = CLIENT_ONLY
 		projectDescription = modrinthReadme
 		if (rangedVersion) {

@@ -1,14 +1,12 @@
-# Advantimations
+# Fontrast
 
-![logo](src/main/resources/assets/advantimations/advantimations.png)
-
-(credit to [thebaum64](https://modrinth.com/user/thebaum64) for [original texture](https://modrinth.com/resourcepack/default-hd-128x))
+![logo](src/main/resources/assets/fontrast/logo/fontrast.png)
 
 ![discord yedel](https://img.shields.io/badge/discord-yedel-blue)
 
-![github release version](https://img.shields.io/github/v/release/Yedelo/Advantimations?include_prereleases&label=github)
+![github release version](https://img.shields.io/github/v/release/Yedelo/Fontrast?include_prereleases&label=github)
 
-![modrinth latest version](https://img.shields.io/modrinth/v/c0aI2COX?label=modrinth)
+![modrinth latest version](https://img.shields.io/modrinth/v/U3ihDy6v?label=modrinth)
 
 Client-side mod to cancel animations
 
