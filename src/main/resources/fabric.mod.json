@@ -26,7 +26,6 @@
   "mixins": [
     "fontrast.mixins.json5"
   ],
-  "accessWidener": "fontrast.classtweaker",
   "depends": {
     "java": "${java}",
     "fabricloader": "${fabricLoader}",
