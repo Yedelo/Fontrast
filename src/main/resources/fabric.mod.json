@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "advantimations",
+  "version": "${version}",
+  "name": "Advantimations",
+  "description": "Client-side mod to cancel animations",
+  "authors": [
+    "Yedel"
+  ],
+  "contributors": [
+    "thebaum64 for original sword texture in icon"
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/advantimations",
+    "issues": "https://github.com/Yedelo/Advantimations/issues",
+    "sources": "https://github.com/Yedelo/Advantimations"
+  },
+  "license": "${license}",
+  "icon": "assets/advantimations/advantimations.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "at.yedel.advantimations.Advantimations"
+    ],
+    "modmenu": [
+      "at.yedel.advantimations.utils.AdvantimationsModMenu"
+    ]
+  },
+  "mixins": [
+    "advantimations.mixins.json5"
+  ],
+  "accessWidener": "advantimations.classtweaker",
+  "depends": {
+    "java": "${java}",
+    "fabricloader": "${fabricLoader}",
+    "minecraft": "${minecraft}",
+    "fabric-api": "*",
+    "yet_another_config_lib_v3": "${yacl}"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.github_releases": "https://github.com/Yedelo/Advantimations/releases/",
+        "modmenu.modrinth": "https://modrinth.com/mod/advantimations"
+      }
+    }
+  }
+}
