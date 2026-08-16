@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 
 @Mixin(targets = "net.minecraft.client.gui.Font$PreparedTextBuilder")
-public abstract class PreparedTextBuilderMixin {
+public abstract class PreparedTextBuilderMixin_Basic {
     @ModifyExpressionValue(method = "accept(ILnet/minecraft/network/chat/Style;Lnet/minecraft/client/gui/font/glyphs/BakedGlyph;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Font$PreparedTextBuilder;getTextColor(Lnet/minecraft/network/chat/TextColor;)I"))
     private int fontrast$getTextColor(int original) {
         return original;

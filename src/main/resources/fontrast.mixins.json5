@@ -3,7 +3,7 @@
   "package": "at.yedel.fontrast.mixin",
   "compatibilityLevel": "${mixinJava}",
   "client": [
-    "PreparedTextBuilderMixin"
+    "PreparedTextBuilderMixin_Basic"
   ],
   "injectors": {
     "defaultRequire": 1
