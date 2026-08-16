@@ -7,8 +7,8 @@ import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
-/*? if fabric {*/
 import dev.isxander.yacl3.gui.controllers.slider.FloatSliderController;
+/*? if fabric {*/
 import net.fabricmc.loader.api.FabricLoader;
 /*?} elif neoforge {*/
 /*import net.neoforged.fml.loading.FMLPaths;
@@ -46,7 +46,7 @@ public class FontrastConfig {
         HANDLER.load();
     }
 
-    private static final String SAMPLE_TEXT = "normal §mstrikethrough §uunderline §lbold §ccolor §clcolorbold";
+    private static final String SAMPLE_TEXT = "normal §mstrikethrough §nunderline §lbold §ccolor §c§lcolorbold";
 
     public static Screen getScreen(Screen parent) {
         return YetAnotherConfigLib.create(HANDLER, (defaults, config, builder) -> {
