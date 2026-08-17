@@ -27,6 +27,16 @@ public abstract class PreparedTextBuilderMixin_Basic {
         return FontrastConfig.getInstance().isUnderlined(original);
     }
 
+    @ModifyExpressionValue(method = "accept(ILnet/minecraft/network/chat/Style;Lnet/minecraft/client/gui/font/glyphs/BakedGlyph;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Font$PreparedTextBuilder;getTextColor(Lnet/minecraft/network/chat/TextColor;)I"))
+    private int fontrast$getTextColor(int original) {
+        return original;
+    }
+
+    @ModifyExpressionValue(method = "accept(ILnet/minecraft/network/chat/Style;Lnet/minecraft/client/gui/font/glyphs/BakedGlyph;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Font$PreparedTextBuilder;getShadowColor(Lnet/minecraft/network/chat/Style;I)I"))
+    private int fontrast$getShadowColor(int original) {
+        return original;
+    }
+
     @ModifyArg(method = "getShadowColor", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/ARGB;scaleRGB(IF)I"), index = 1)
     private float fontrast$getShadowScale(float original) {
         if (FontrastConfig.getInstance().isEnabled()) {
