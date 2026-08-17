@@ -13,7 +13,7 @@ import java.util.function.UnaryOperator;
 
 
 
-public enum NeutralOption implements NameableEnum {
+public enum ControlOption implements NameableEnum {
     NEVER(Component.literal("Never"), (original) -> false),
     DEFAULT(Component.literal("Default"), (original) -> original),
     ALWAYS(Component.literal("Always"), (original) -> true);
@@ -21,7 +21,7 @@ public enum NeutralOption implements NameableEnum {
     private final Component displayName;
     private final UnaryOperator<Boolean> shouldApply;
 
-    NeutralOption(Component displayName, UnaryOperator<Boolean> shouldApply) {
+    ControlOption(Component displayName, UnaryOperator<Boolean> shouldApply) {
         this.displayName = displayName;
         this.shouldApply = shouldApply;
     }
@@ -35,7 +35,7 @@ public enum NeutralOption implements NameableEnum {
         return displayName;
     }
 
-    public static Function<Option<NeutralOption>, ControllerBuilder<NeutralOption>> controller() {
-        return (option) -> EnumControllerBuilder.create(option).enumClass(NeutralOption.class);
+    public static Function<Option<ControlOption>, ControllerBuilder<ControlOption>> controller() {
+        return (option) -> EnumControllerBuilder.create(option).enumClass(ControlOption.class);
     }
 }
