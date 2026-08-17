@@ -3,7 +3,10 @@
   "package": "at.yedel.fontrast.mixin",
   "compatibilityLevel": "${mixinJava}",
   "client": [
-    "PreparedTextBuilderMixin_Basic"
+    "PreparedTextBuilderMixin_Basic",
+    "BakedSheetGlyphMixin",
+    "FontMixin",
+    "GlyphInstanceMixin"
   ],
   "injectors": {
     "defaultRequire": 1

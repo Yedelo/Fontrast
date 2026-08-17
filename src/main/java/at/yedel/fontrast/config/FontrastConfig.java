@@ -78,6 +78,28 @@ public class FontrastConfig {
                     .name(Component.literal("Text Style Control"))
                     .tooltip(Component.literal("Control the style of text."))
                     .option(Option.<NeutralOption>createBuilder()
+                        .name(Component.literal("Bold Control"))
+                        .description(OptionDescription.of(Component.literal("Controls the bold style on text.")))
+                        .binding(
+                            defaults.getBoldControl(),
+                            config::getBoldControl,
+                            config::setBoldControl
+                        )
+                        .controller(NeutralOption.controller())
+                        .build()
+                    )
+                    .option(Option.<NeutralOption>createBuilder()
+                        .name(Component.literal("Italic Control"))
+                        .description(OptionDescription.of(Component.literal("Controls the italic style on text.")))
+                        .binding(
+                            defaults.getItalicControl(),
+                            config::getItalicControl,
+                            config::setItalicControl
+                        )
+                        .controller(NeutralOption.controller())
+                        .build()
+                    )
+                    .option(Option.<NeutralOption>createBuilder()
                         .name(Component.literal("Strikethrough Control"))
                         .description(OptionDescription.of(Component.literal("Controls the strikethrough style on text.")))
                         .binding(
@@ -123,31 +145,77 @@ public class FontrastConfig {
     }
 
     @SerialEntry private boolean enabled = true;
+    @SerialEntry private NeutralOption boldControl = NeutralOption.DEFAULT;
+    @SerialEntry private NeutralOption italicControl = NeutralOption.DEFAULT;
     @SerialEntry private NeutralOption strikethroughControl = NeutralOption.DEFAULT;
     @SerialEntry private NeutralOption underlineControl = NeutralOption.DEFAULT;
     @SerialEntry private float shadowScale = 0.25f;
+
+    public boolean isBold(boolean original) {
+        if (isEnabled()) {
+            return getBoldControl().shouldApply(original);
+        }
+        return original;
+    }
+
+    public boolean isItalic(boolean original) {
+        if (isEnabled()) {
+            return getItalicControl().shouldApply(original);
+        }
+        return original;
+    }
+
+    public boolean isStrikethrough(boolean original) {
+        if (isEnabled()) {
+            return getStrikethroughControl().shouldApply(original);
+        }
+        return original;
+    }
+
+    public boolean isUnderlined(boolean original) {
+        if (isEnabled()) {
+            return getUnderlineControl().shouldApply(original);
+        }
+        return original;
+    }
 
     public boolean isEnabled() {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
+    private void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
 
-    public NeutralOption getStrikethroughControl() {
+    private NeutralOption getBoldControl() {
+        return boldControl;
+    }
+
+    private void setBoldControl(NeutralOption boldControl) {
+        this.boldControl = boldControl;
+    }
+
+    private NeutralOption getItalicControl() {
+        return italicControl;
+    }
+
+    private void setItalicControl(NeutralOption italicControl) {
+        this.italicControl = italicControl;
+    }
+
+    private NeutralOption getStrikethroughControl() {
         return strikethroughControl;
     }
 
-    public void setStrikethroughControl(NeutralOption strikethroughControl) {
+    private void setStrikethroughControl(NeutralOption strikethroughControl) {
         this.strikethroughControl = strikethroughControl;
     }
 
-    public NeutralOption getUnderlineControl() {
+    private NeutralOption getUnderlineControl() {
         return underlineControl;
     }
 
-    public void setUnderlineControl(NeutralOption underlineControl) {
+    private void setUnderlineControl(NeutralOption underlineControl) {
         this.underlineControl = underlineControl;
     }
 
@@ -155,7 +223,7 @@ public class FontrastConfig {
         return shadowScale;
     }
 
-    public void setShadowScale(float shadowScale) {
+    private void setShadowScale(float shadowScale) {
         this.shadowScale = shadowScale;
     }
 }
