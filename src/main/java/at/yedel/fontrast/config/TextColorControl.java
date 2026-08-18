@@ -19,8 +19,9 @@ import java.awt.*;
 
 
 public class TextColorControl {
-    @SerialEntry public boolean multiplyColors = false;
-    @SerialEntry public Color colorMultiplier = Color.white;
+    @SerialEntry boolean multiplyColors = false;
+    @SerialEntry Color colorMultiplier = Color.white;
+    @SerialEntry CustomTextColorControl customTextColorControl = new CustomTextColorControl();
     @SerialEntry public float shadowScale = 0.25f;
 
     public static ConfigCategory createCategory(TextColorControl defaults, TextColorControl control) {
@@ -53,6 +54,7 @@ public class TextColorControl {
                 )
                 .build()
             )
+            .group(CustomTextColorControl.createGroup(defaults.customTextColorControl, control.customTextColorControl))
             .option(Option.<Float>createBuilder()
                 .name(Component.literal("Shadow Scale"))
                 .description(OptionDescription.of(Component.literal("Control how shadow colors scale.\n\nThis controls the multiplier of the shadow colors. A scale of 0 means that shadows will be completely black, and a scale of 1 means that shadows will be the same color as the main text.")))

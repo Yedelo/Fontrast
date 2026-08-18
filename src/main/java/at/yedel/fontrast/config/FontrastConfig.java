@@ -118,6 +118,9 @@ public class FontrastConfig {
             if (textColorControl.multiplyColors) {
                 return ARGB.multiply(original, textColorControl.colorMultiplier.getRGB());
             }
+            else if (textColorControl.customTextColorControl.enabled) {
+                return textColorControl.customTextColorControl.getTextColor(original);
+            }
         }
         return original;
     }
