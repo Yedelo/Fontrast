@@ -117,10 +117,10 @@ public class FontrastConfig {
         if (enabled) {
             int color = original;
             if (textColorControl.customTextColors.enabled) {
-                color = textColorControl.customTextColors.getTextColor(color);
+                color = textColorControl.customTextColors.getColor(color, color);
             }
             if (textColorControl.multiplyColors) {
-                color = ARGB.multiply(color, textColorControl.colorMultiplier.getRGB());
+                color = ARGB.multiply(color, textColorControl.colorMultiplier);
             }
             return color;
         }
@@ -128,6 +128,18 @@ public class FontrastConfig {
     }
 
     public int getShadowColor(int original, int textColor) {
+        if (enabled) {
+            if (textColorControl.customShadowColors.enabled) {
+                return textColorControl.customShadowColors.getColor(original, textColor);
+            }
+        }
+        return original;
+    }
+
+    public float getShadowScale(float original) {
+        if (enabled) {
+            return textColorControl.shadowScale;
+        }
         return original;
     }
 }

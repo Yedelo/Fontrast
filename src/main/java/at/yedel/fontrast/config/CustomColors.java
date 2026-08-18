@@ -2,6 +2,7 @@ package at.yedel.fontrast.config;
 
 
 
+import dev.isxander.yacl3.api.ButtonOption;
 import dev.isxander.yacl3.api.Option;
 import dev.isxander.yacl3.api.OptionDescription;
 import dev.isxander.yacl3.api.OptionGroup;
@@ -9,6 +10,7 @@ import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
 import dev.isxander.yacl3.api.controller.ColorControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.ARGB;
 
 import java.awt.*;
 import java.util.*;
@@ -16,7 +18,7 @@ import java.util.List;
 
 
 
-public class CustomTextColors {
+public class CustomColors {
     private static final List<Integer> RAW_COLOR_DEFINITIONS = new ArrayList<>();
     private static final List<ColorDefinition> COLOR_DEFINITIONS = new ArrayList<>();
 
@@ -39,20 +41,30 @@ public class CustomTextColors {
         register(0xFFFFFFFF, "White", "f");
     }
 
+    private List<Option<Color>> colorOptions = new ArrayList<>();
     @SerialEntry boolean enabled = false;
+    // using raw integer colors instead of awt Colors because they are much easier
     @SerialEntry List<Integer> colorStore = new ArrayList<>(RAW_COLOR_DEFINITIONS);
+
+    public CustomColors(boolean shadow) {
+        if (shadow) {
+            for (int i = 0; i < colorStore.size(); i ++) {
+                colorStore.set(i, ARGB.scaleRGB(colorStore.get(i), 0.25f));
+            }
+        }
+    }
     
-    int getTextColor(int original) {
-        if (RAW_COLOR_DEFINITIONS.contains(original)) {
-            return colorStore.get(RAW_COLOR_DEFINITIONS.indexOf(original));
+    int getColor(int original, int textColor) {
+        if (RAW_COLOR_DEFINITIONS.contains(textColor)) {
+            return colorStore.get(RAW_COLOR_DEFINITIONS.indexOf(textColor));
         }
         return original;
     }
 
-    public static OptionGroup createGroup(CustomTextColors defaults, CustomTextColors colors) {
+    public static OptionGroup createGroup(CustomColors defaults, CustomColors colors, boolean shadow) {
         OptionGroup.Builder builder = OptionGroup.createBuilder();
         builder
-            .name(Component.literal("Custom Text Color Control"))
+            .name(Component.literal(shadow ? "Custom Shadow Colors" : "Custom Text Colors"))
             .description(OptionDescription.of(Component.literal("Customizes the color of text.")))
             .option(Option.<Boolean>createBuilder()
                 .name(Component.literal("Enabled"))
@@ -63,22 +75,35 @@ public class CustomTextColors {
                 )
                 .controller(BooleanControllerBuilder::create)
                 .build()
+            )
+            .option(ButtonOption.createBuilder()
+                .name(Component.literal("Randomize Colors"))
+                .description(OptionDescription.of(Component.literal("Randomizes every color below, minus the alpha component which stays at 100%.")))
+                .text(Component.literal("Randomize"))
+                .action((screen, option) -> {
+                    for (Option<Color> colorOption : colors.colorOptions) {
+                        colorOption.stateManager().set(new Color(0xFF000000 | new Random().nextInt(0xFFFFFF), true));
+                    }
+                    FontrastConfig.HANDLER.save();
+                })
+                .build()
             );
         for (int i = 0; i < COLOR_DEFINITIONS.size(); i ++) {
             ColorDefinition colorDefinition = COLOR_DEFINITIONS.get(i);
             // thank you intellij
             int finalI = i;
-            builder.option(Option.<Color>createBuilder()
-                .name(Component.literal(colorDefinition.name).append(" Color"))
-                .description(OptionDescription.of(colorDefinition.description()))
+            Option<Color> colorOption = Option.<Color>createBuilder()
+                .name(Component.literal(colorDefinition.name).append(shadow ? " Shadow Color" : " Color"))
+                .description(OptionDescription.of(colorDefinition.description(shadow)))
                 .binding(
                     new Color(defaults.colorStore.get(i)),
                     () -> new Color(colors.colorStore.get(finalI), true),
                     (col) -> colors.colorStore.set(finalI, col.getRGB())
                 )
                 .controller((option) -> ColorControllerBuilder.create(option).allowAlpha(true))
-                .build()
-            );
+                .build();
+            colors.colorOptions.add(colorOption);
+            builder.option(colorOption);
         }
         return builder.build();
     }
@@ -88,11 +113,13 @@ public class CustomTextColors {
         COLOR_DEFINITIONS.add(new ColorDefinition(argb, name, code));
     }
 
+
+
     private record ColorDefinition(int argb, String name, String code) {
-        Component description() {
+        Component description(boolean shadow) {
             return Component.literal("Overrides the color value of the ")
                 .append(name.toLowerCase().replace(" ", "_"))
-                .append(" color (&")
+                .append(shadow ? " shadow color (&" : " color (&")
                 .append(code)
                 .append(", #")
                 .append(String.format("%08x", argb))

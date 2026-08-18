@@ -18,9 +18,10 @@ import java.awt.*;
 
 public class TextColorControl {
     @SerialEntry boolean multiplyColors = false;
-    @SerialEntry Color colorMultiplier = Color.white;
+    @SerialEntry int colorMultiplier = 0xFFFFFFFF;
     @SerialEntry public float shadowScale = 0.25f;
-    @SerialEntry CustomTextColors customTextColors = new CustomTextColors();
+    @SerialEntry CustomColors customTextColors = new CustomColors(false);
+    @SerialEntry CustomColors customShadowColors = new CustomColors(true);
 
     public static ConfigCategory createCategory(TextColorControl defaults, TextColorControl control) {
         return ConfigCategory.createBuilder()
@@ -43,9 +44,9 @@ public class TextColorControl {
                     .name(Component.literal("Color Multiplier"))
                     .description(OptionDescription.of(Component.literal("The color to multiply by.")))
                     .binding(
-                        defaults.colorMultiplier,
-                        () -> control.colorMultiplier,
-                        (colorMultiplier) -> control.colorMultiplier = colorMultiplier
+                        new Color(defaults.colorMultiplier),
+                        () -> new Color(control.colorMultiplier),
+                        (colorMultiplier) -> control.colorMultiplier = colorMultiplier.getRGB()
                     )
                     .controller((option) -> ColorControllerBuilder.create(option).allowAlpha(true))
                     .build()
@@ -63,7 +64,8 @@ public class TextColorControl {
                 )
                 .build()
             )
-            .group(CustomTextColors.createGroup(defaults.customTextColors, control.customTextColors))
+            .group(CustomColors.createGroup(defaults.customTextColors, control.customTextColors, false))
+            .group(CustomColors.createGroup(defaults.customShadowColors, control.customShadowColors, true))
             .build();
     }
 }

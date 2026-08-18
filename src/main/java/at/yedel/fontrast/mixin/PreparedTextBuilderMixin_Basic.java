@@ -11,6 +11,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.network.chat.Style;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Coerce;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
@@ -19,6 +20,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 @Mixin(targets = "net.minecraft.client.gui.Font$PreparedTextBuilder")
 public abstract class PreparedTextBuilderMixin_Basic {
+    @Unique private int fontrast$textColor;
     @Shadow protected abstract int getShadowColor(Style style, int textColor);
 
     @ModifyExpressionValue(method = "accept(ILnet/minecraft/network/chat/Style;Lnet/minecraft/client/gui/font/glyphs/BakedGlyph;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/chat/Style;isBold()Z"))
@@ -38,19 +40,17 @@ public abstract class PreparedTextBuilderMixin_Basic {
 
     @ModifyExpressionValue(method = "accept(ILnet/minecraft/network/chat/Style;Lnet/minecraft/client/gui/font/glyphs/BakedGlyph;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Font$PreparedTextBuilder;getTextColor(Lnet/minecraft/network/chat/TextColor;)I"))
     private int fontrast$getTextColor(int original) {
+        fontrast$textColor = original;
         return FontrastConfig.getInstance().getTextColor(original);
     }
 
     @ModifyExpressionValue(method = "accept(ILnet/minecraft/network/chat/Style;Lnet/minecraft/client/gui/font/glyphs/BakedGlyph;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Font$PreparedTextBuilder;getShadowColor(Lnet/minecraft/network/chat/Style;I)I"))
-    private int fontrast$getShadowColor(int original, @Local(name = "textColor") int textColor) {
-        return FontrastConfig.getInstance().getShadowColor(original, textColor);
+    private int fontrast$getShadowColor(int original) {
+        return FontrastConfig.getInstance().getShadowColor(original, fontrast$textColor);
     }
 
     @ModifyArg(method = "getShadowColor", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/ARGB;scaleRGB(IF)I"), index = 1)
     private float fontrast$getShadowScale(float original) {
-        if (FontrastConfig.getInstance().enabled) {
-            return FontrastConfig.getInstance().textColorControl.shadowScale;
-        }
-        return original;
+        return FontrastConfig.getInstance().getShadowScale(original);
     }
 }
