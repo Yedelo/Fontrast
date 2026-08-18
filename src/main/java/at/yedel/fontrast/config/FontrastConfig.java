@@ -15,6 +15,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
 
@@ -46,7 +47,23 @@ public class FontrastConfig {
         HANDLER.load();
     }
 
-    private static final String SAMPLE_TEXT = "normal §mstrikethrough §nunderline §lbold §ccolor §c§lcolorbold";
+    private static final Component FORMATTING_GUIDE = Component.literal(
+        "§cC§6o§el§ao§9r §1c§5o§dd§be§3s§r:" + // "Color codes:" (in rainbow)
+            "\n§8Black: §8&0     §4Dark Red: §4&4     §2Dark Green: §2&2     §1Dark Blue: §1&1" +
+            "\n§3Dark Aqua: §3&3     §5Dark Purple: §5&5     §6Gold: §6&6     §7Gray: §7&7" +
+            "\n§8Dark Gray: §8&8     §9Blue: §9&9     §aGreen: §a&a     §bAqua: §b&b" +
+            "\n§cRed: §c&c     §dLight Purple: §d&d     §eYellow: §e&e     §fWhite: §f&f" +
+            "\n" +
+            "\n§lStyle §ncodes§r:" +
+            "\n§kObfuscated§r: &k     §r§lBold: §l&l     §r§mStrikethrough: §m&m§r" +
+            "\n§nUnderline: §n&n§r     §r§oItalic: §o&o    §rReset: §r&r"
+    );
+    private static final Component FORMATTING_GUIDE_MESSAGE =
+        Component.literal("§e§nHover to view the formatting guide.").withStyle((style) -> style.withHoverEvent(new HoverEvent.ShowText(FORMATTING_GUIDE)));
+
+    @SerialEntry public boolean enabled = true;
+    @SerialEntry public TextStyleControl textStyleControl = new TextStyleControl();
+    @SerialEntry public TextColorControl textColorControl = new TextColorControl();
 
     public static Screen getScreen(Screen parent) {
         return YetAnotherConfigLib.create(HANDLER, (defaults, config, builder) -> {
@@ -65,9 +82,9 @@ public class FontrastConfig {
                         .build()
                     )
                     .option(ButtonOption.createBuilder()
-                        .name(Component.literal("Show Sample Text"))
-                        .description(OptionDescription.of(Component.literal("Shows the following in chat:\n" + SAMPLE_TEXT)))
-                        .action((screen, button) -> Minecraft.getInstance().gui.getChat().addClientSystemMessage(Component.literal(SAMPLE_TEXT)))
+                        .name(Component.literal("Show Formatting Guide"))
+                        .description(OptionDescription.of(Component.literal("Shows the following in chat:\n").append(FORMATTING_GUIDE)))
+                        .action((screen, button) -> Minecraft.getInstance().gui.getChat().addClientSystemMessage(FORMATTING_GUIDE_MESSAGE))
                         // ts says "EXECUTE" by default
                         .text(Component.literal("Show"))
                         .build()
@@ -80,10 +97,6 @@ public class FontrastConfig {
             }
         ).generateScreen(parent);
     }
-
-    @SerialEntry public boolean enabled = true;
-    @SerialEntry public TextStyleControl textStyleControl = new TextStyleControl();
-    @SerialEntry public TextColorControl textColorControl = new TextColorControl();
 
     public boolean isBold(boolean original) {
         if (enabled) {
