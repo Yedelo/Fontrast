@@ -8,10 +8,8 @@ import dev.isxander.yacl3.api.OptionDescription;
 import dev.isxander.yacl3.api.OptionGroup;
 import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
 import dev.isxander.yacl3.api.controller.ColorControllerBuilder;
-import dev.isxander.yacl3.api.controller.TickBoxControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.gui.controllers.slider.FloatSliderController;
-import dev.isxander.yacl3.impl.controller.TickBoxControllerBuilderImpl;
 import net.minecraft.network.chat.Component;
 
 import java.awt.*;
@@ -21,8 +19,8 @@ import java.awt.*;
 public class TextColorControl {
     @SerialEntry boolean multiplyColors = false;
     @SerialEntry Color colorMultiplier = Color.white;
-    @SerialEntry CustomTextColorControl customTextColorControl = new CustomTextColorControl();
     @SerialEntry public float shadowScale = 0.25f;
+    @SerialEntry CustomTextColors customTextColors = new CustomTextColors();
 
     public static ConfigCategory createCategory(TextColorControl defaults, TextColorControl control) {
         return ConfigCategory.createBuilder()
@@ -52,20 +50,20 @@ public class TextColorControl {
                     .controller((option) -> ColorControllerBuilder.create(option).allowAlpha(true))
                     .build()
                 )
-                .build()
-            )
-            .group(CustomTextColorControl.createGroup(defaults.customTextColorControl, control.customTextColorControl))
-            .option(Option.<Float>createBuilder()
-                .name(Component.literal("Shadow Scale"))
-                .description(OptionDescription.of(Component.literal("Control how shadow colors scale.\n\nThis controls the multiplier of the shadow colors. A scale of 0 means that shadows will be completely black, and a scale of 1 means that shadows will be the same color as the main text.")))
-                .binding(
-                    defaults.shadowScale,
-                    () -> control.shadowScale,
-                    (shadowScale) -> control.shadowScale = shadowScale
+                .option(Option.<Float>createBuilder()
+                    .name(Component.literal("Shadow Scale"))
+                    .description(OptionDescription.of(Component.literal("Control how shadow colors scale.\n\nThis controls the multiplier of the shadow colors. A scale of 0 means that shadows will be completely black, and a scale of 1 means that shadows will be the same color as the main text.")))
+                    .binding(
+                        defaults.shadowScale,
+                        () -> control.shadowScale,
+                        (shadowScale) -> control.shadowScale = shadowScale
+                    )
+                    .customController((option) -> new FloatSliderController(option, 0f, 1f, 0.01f))
+                    .build()
                 )
-                .customController((option) -> new FloatSliderController(option, 0f, 1f, 0.01f))
                 .build()
             )
+            .group(CustomTextColors.createGroup(defaults.customTextColors, control.customTextColors))
             .build();
     }
 }
