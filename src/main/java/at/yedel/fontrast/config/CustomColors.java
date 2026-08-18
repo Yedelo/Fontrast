@@ -41,7 +41,6 @@ public class CustomColors {
         register(0xFFFFFFFF, "White", "f");
     }
 
-    private List<Option<Color>> colorOptions = new ArrayList<>();
     @SerialEntry boolean enabled = false;
     // using raw integer colors instead of awt Colors because they are much easier
     @SerialEntry List<Integer> colorStore = new ArrayList<>(RAW_COLOR_DEFINITIONS);
@@ -81,7 +80,7 @@ public class CustomColors {
                 .description(OptionDescription.of(Component.literal("Randomizes every color below, minus the alpha component which stays at 100%.")))
                 .text(Component.literal("Randomize"))
                 .action((screen, option) -> {
-                    for (Option<Color> colorOption : colors.colorOptions) {
+                    for (Option<Color> colorOption : OptionRegistry.getOptions(colors)) {
                         colorOption.stateManager().set(new Color(0xFF000000 | new Random().nextInt(0xFFFFFF), true));
                     }
                     FontrastConfig.HANDLER.save();
@@ -102,7 +101,7 @@ public class CustomColors {
                 )
                 .controller((option) -> ColorControllerBuilder.create(option).allowAlpha(true))
                 .build();
-            colors.colorOptions.add(colorOption);
+            OptionRegistry.registerOption(colors, colorOption);
             builder.option(colorOption);
         }
         return builder.build();

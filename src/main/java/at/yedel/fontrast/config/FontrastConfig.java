@@ -19,6 +19,7 @@ import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
 
+import java.lang.reflect.Modifier;
 import java.nio.file.Path;
 
 
@@ -64,6 +65,7 @@ public class FontrastConfig {
     @SerialEntry public boolean enabled = true;
     @SerialEntry public TextStyleControl textStyleControl = new TextStyleControl();
     @SerialEntry public TextColorControl textColorControl = new TextColorControl();
+    @SerialEntry public AdvancedControl advancedControl = new AdvancedControl();
 
     public static Screen getScreen(Screen parent) {
         return YetAnotherConfigLib.create(HANDLER, (defaults, config, builder) -> {
@@ -93,6 +95,7 @@ public class FontrastConfig {
                 );
                 builder.category(TextStyleControl.createCategory(defaults.textStyleControl, config.textStyleControl));
                 builder.category(TextColorControl.createCategory(defaults.textColorControl, config.textColorControl));
+                builder.category(AdvancedControl.createCategory(defaults.advancedControl, config.advancedControl));
                 return builder;
             }
         ).generateScreen(parent);
@@ -159,6 +162,24 @@ public class FontrastConfig {
     public float getShadowScale(float original) {
         if (enabled) {
             return textColorControl.shadowScale;
+        }
+        return original;
+    }
+
+    public float getShadowOffset(float original) {
+        if (enabled) {
+            if (advancedControl.enabled) {
+                return original * advancedControl.shadowOffsetMultiplier;
+            }
+        }
+        return original;
+    }
+
+    public float getBoldOffset(float original) {
+        if (enabled) {
+            if (advancedControl.enabled) {
+                return original * advancedControl.boldOffsetMultiplier;
+            }
         }
         return original;
     }

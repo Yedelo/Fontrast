@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 
 @Mixin(Font.class)
-public abstract class FontMixin {
+public abstract class FontMixin_Basic {
     // bless intellij plugin for finding this for me
     @ModifyExpressionValue(method = "lambda$new$0", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/chat/Style;isBold()Z"))
     private boolean fontrast$isBold$init(boolean original) {

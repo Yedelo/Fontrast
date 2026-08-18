@@ -5,8 +5,10 @@
   "client": [
     "PreparedTextBuilderMixin_Basic",
     "BakedSheetGlyphMixin",
-    "FontMixin",
-    "GlyphInstanceMixin"
+    "FontMixin_Basic",
+    "GlyphInstanceMixin",
+    "FontMixin_Advanced",
+    "PreparedTextBuilderMixin_Advanced"
   ],
   "injectors": {
     "defaultRequire": 1
