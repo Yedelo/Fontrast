@@ -16,6 +16,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.ARGB;
 
 import java.nio.file.Path;
 
@@ -113,6 +114,11 @@ public class FontrastConfig {
     }
 
     public int getTextColor(int original) {
+        if (enabled) {
+            if (textColorControl.multiplyColors) {
+                return ARGB.multiply(original, textColorControl.colorMultiplier.getRGB());
+            }
+        }
         return original;
     }
 
