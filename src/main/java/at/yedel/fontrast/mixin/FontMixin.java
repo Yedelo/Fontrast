@@ -22,4 +22,9 @@ public abstract class FontMixin {
     private boolean fontrast$isBold$drawInBatch8xOutline(boolean original) {
         return FontrastConfig.getInstance().isBold(original);
     }
+
+    @ModifyExpressionValue(method = "getGlyph", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/chat/Style;isObfuscated()Z"))
+    private boolean fontrast$isObfuscated(boolean original) {
+        return FontrastConfig.getInstance().isObfuscated(original);
+    }
 }

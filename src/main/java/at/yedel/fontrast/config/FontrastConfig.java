@@ -113,6 +113,13 @@ public class FontrastConfig {
         return original;
     }
 
+    public boolean isObfuscated(boolean original) {
+        if (enabled) {
+            return textStyleControl.obfuscationControl.shouldApply(original);
+        }
+        return original;
+    }
+
     public int getTextColor(int original) {
         if (enabled) {
             int color = original;
