@@ -67,7 +67,7 @@ public class TextStyleControl {
             )
             .option(Option.<ControlOption>createBuilder()
                 .name(Component.literal("Obfuscation Control"))
-                .description(OptionDescription.of(Component.literal("Controls the obfuscation style on text.")))
+                .description(OptionDescription.of(Component.literal("Controls the obfuscation style on text.\n⚠ Setting this to \"Always\" may drop your game's performance.")))
                 .binding(
                     defaults.obfuscationControl,
                     () -> control.obfuscationControl,
