@@ -8,7 +8,7 @@
 
 ![modrinth latest version](https://img.shields.io/modrinth/v/U3ihDy6v?label=modrinth)
 
-Client-side mod to cancel animations
+Adds numerous ways to customize the look of text
 
 ## Dependencies
 
@@ -18,41 +18,28 @@ Client-side mod to cancel animations
 
 ## Features
 
-<details><summary>Item Model</summary>
+<details><summary>Text Style Control</summary>
 
-- Cancel Swings
-
-- Cancel Eating Animation
-- Cancel Drinking Animation
-- Cancel Blocking Animation
-- Cancel Shield Animation
-- Cancel Bow Animation
-- Cancel Crossbow Animation
-- Cancel Charged Crossbow Animation
-- Cancel Spyglass Animation
-- Cancel Horn Toot Animation
-- Cancel Trident Spear Animation
-- Cancel Riptide Animation
-- Cancel Brushing Animation
-- Cancel Bundle Animation
-- Cancel Spear Animation
-- Cancel Bow Arrow Model
-- Cancel Crossbow Arrow Model
-
-- Cancel Attack Cooldown Resets
-- Cancel Block Interact Resets
-- Cancel Item Interact Resets
-- Cancel Slot Swapping Resets
+- Bold Control
+- Italic Control
+- Strikethrough Control
+- Underline Control
+- Obfuscation Control
 
 </details>
 
-<details><summary>Entity Model</summary>
+<details><summary>Text Color Control</summary>
 
-- Cancel Sneaking
-- Cancel Swimming Animation
-- Cancel Crawling Animation
-- Cancel Elytra Animation
-- Cancel Limb Movements
-- Weirder Limb Movements
+- Multiply Colors
+- Shadow Scale
+- Custom Text Colors
+- Custom Shadow Colors
+
+</details>
+
+<details><summary>Advanced</summary>
+
+- Shadow Offset Multiplier
+- Bold Offset Multiplier
 
 </details>
