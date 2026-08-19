@@ -1,6 +1,6 @@
 # Fontrast
 
-![logo](src/main/resources/assets/fontrast/logo/fontrast.png)
+![logo](src/main/resources/assets/fontrast/fontrast.png)
 
 ![discord yedel](https://img.shields.io/badge/discord-yedel-blue)
 

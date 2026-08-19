@@ -13,7 +13,7 @@
     "sources": "https://github.com/Yedelo/Fontrast"
   },
   "license": "${license}",
-  "icon": "assets/fontrast/logo/fontrast.png",
+  "icon": "assets/fontrast/fontrast.png",
   "environment": "client",
   "entrypoints": {
     "client": [
