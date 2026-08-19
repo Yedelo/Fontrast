@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(Font.class)
 public abstract class FontMixin_Advanced {
-    @ModifyExpressionValue(method = "lambda$drawInBatch8xOutline$0", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/font/GlyphInfo;getShadowOffset()F"))
+    @ModifyExpressionValue(method = {"lambda$drawInBatch8xOutline$0", "lambda$prepare8xTextOutline$0"}, at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/font/GlyphInfo;getShadowOffset()F"))
     private float fontrast$getShadowOffset$drawInBatch8xOutline(float original) {
         return FontrastConfig.getInstance().getShadowOffset(original);
     }

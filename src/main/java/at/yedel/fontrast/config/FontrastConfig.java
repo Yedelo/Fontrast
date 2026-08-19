@@ -12,14 +12,11 @@ import net.fabricmc.loader.api.FabricLoader;
 /*?} elif neoforge {*/
 /*import net.neoforged.fml.loading.FMLPaths;
 *//*?}*/
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
 
-import java.lang.reflect.Modifier;
 import java.nio.file.Path;
 
 
@@ -59,8 +56,6 @@ public class FontrastConfig {
             "\n§kObfuscated§r: &k     §r§lBold: §l&l     §r§mStrikethrough: §m&m§r" +
             "\n§nUnderline: §n&n§r     §r§oItalic: §o&o    §rReset: §r&r"
     );
-    private static final Component FORMATTING_GUIDE_MESSAGE =
-        Component.literal("§e§nHover to view the formatting guide.").withStyle((style) -> style.withHoverEvent(new HoverEvent.ShowText(FORMATTING_GUIDE)));
 
     @SerialEntry public boolean enabled = true;
     @SerialEntry public TextStyleControl textStyleControl = new TextStyleControl();
@@ -85,10 +80,10 @@ public class FontrastConfig {
                     )
                     .option(ButtonOption.createBuilder()
                         .name(Component.literal("Show Formatting Guide"))
-                        .description(OptionDescription.of(Component.literal("Shows the following in chat:\n").append(FORMATTING_GUIDE)))
-                        .action((screen, button) -> Minecraft.getInstance().gui.getChat().addClientSystemMessage(FORMATTING_GUIDE_MESSAGE))
-                        // ts says "EXECUTE" by default
-                        .text(Component.literal("Show"))
+                        .description(OptionDescription.of(FORMATTING_GUIDE))
+                        .action((_, _) -> {})
+                        // ts says "EXECUTE" by default 😭😭😭
+                        .text(Component.literal("Hover"))
                         .build()
                     )
                     .build()

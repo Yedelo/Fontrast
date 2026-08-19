@@ -18,7 +18,7 @@ public abstract class FontMixin_Basic {
         return FontrastConfig.getInstance().isBold(original);
     }
 
-    @ModifyExpressionValue(method = "lambda$drawInBatch8xOutline$0", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/chat/Style;isBold()Z"))
+    @ModifyExpressionValue(method = {"lambda$drawInBatch8xOutline$0", "lambda$prepare8xTextOutline$0"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/network/chat/Style;isBold()Z"))
     private boolean fontrast$isBold$drawInBatch8xOutline(boolean original) {
         return FontrastConfig.getInstance().isBold(original);
     }
