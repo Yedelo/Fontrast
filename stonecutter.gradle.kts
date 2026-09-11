@@ -62,7 +62,7 @@ stonecutter parameters {
     val finalFileName by Declare("Fontrast-$version+$minecraftTarget-$loader.jar")
 
     val modrinthReadme by Declare(rootProject.file("README.md").readText()
-        .replace("src/main/resources/assets/fontrast/logo/fontrast.png", modrinthLogoLink)
+        .replace("src/main/resources/assets/fontrast/fontrast.png", modrinthLogoLink)
     )
 }
 
