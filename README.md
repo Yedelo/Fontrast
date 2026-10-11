@@ -25,6 +25,7 @@ Adds numerous ways to customize the look of text
 - Strikethrough Control
 - Underline Control
 - Obfuscation Control
+- Use Legacy Obfuscation
 
 </details>
 
