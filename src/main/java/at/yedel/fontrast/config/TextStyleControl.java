@@ -17,7 +17,7 @@ import net.minecraft.network.chat.Component;
 
 
 public class TextStyleControl {
-    private static final String MAX_OBFUSCATION_PASSES_DESCRIPTION = "The legacy obfuscated text fetching system uses a while loop to fetch random characters until one is equal in width to the character being obfuscated. For certain characters, there may not be a match at all, causing the while loop to repeat infinitely and freeze the game. This option limits the amount of iterations the loop can run, which makes the loop give up after a certain amount of passes. Lower values lead to some characters not being obfuscated at all, and may be more performant.";
+    private static final String MAX_OBFUSCATION_PASSES_DESCRIPTION = "The legacy obfuscated text fetching system uses a while loop to fetch random characters until one is equal in width to the character being obfuscated. For certain characters, there may not be a match at all, causing the while loop to repeat infinitely and freeze the game. This option limits the amount of iterations the loop can run, which makes the loop give up after a certain amount of passes. Lower values lead to less randomness and some characters not being obfuscated at all, and may be more performant.";
 
     @SerialEntry public ControlOption boldControl = ControlOption.DEFAULT;
     @SerialEntry public ControlOption italicControl = ControlOption.DEFAULT;
