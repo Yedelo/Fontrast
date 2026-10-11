@@ -77,7 +77,7 @@ public class TextStyleControl {
             )
             .option(Option.<ControlOption>createBuilder()
                 .name(Component.literal("Obfuscation Control"))
-                .description(OptionDescription.of(Component.literal("Controls the obfuscation style on text.\n⚠ Setting this to \"Always\" may drop your game's performance.")))
+                .description(OptionDescription.of(Component.literal("Controls the obfuscation style on text.\n⚠ Setting this to \"Always\" will DEFINITELY drop your game's performance.")))
                 .binding(
                     defaults.obfuscationControl,
                     () -> control.obfuscationControl,
@@ -91,7 +91,7 @@ public class TextStyleControl {
                 .description(OptionDescription.of(Component.literal("Control the look and functionality of obfuscated text.")))
                 .option(Option.<Boolean>createBuilder()
                     .name(Component.literal("Use Legacy Obfuscation"))
-                    .description(OptionDescription.of(Component.literal("Uses an older method for getting obfuscated text, which can look cleaner.")))
+                    .description(OptionDescription.of(Component.literal("Uses an older method for getting obfuscated text, which can look cleaner.\nⓘ This may increase or decrease your performance.")))
                     .binding(
                         defaults.useLegacyObfuscation,
                         () -> control.useLegacyObfuscation,
