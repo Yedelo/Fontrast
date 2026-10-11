@@ -16,6 +16,9 @@ displayURL = "https://modrinth.com/mod/fontrast/"
 [[mixins]]
 config = "fontrast.mixins.json5"
 
+[[accessTransformers]]
+file="META-INF/accesstransformer.cfg"
+
 [features.fontrast]
 javaVersion = "${java}"
 

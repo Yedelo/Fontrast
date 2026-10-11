@@ -41,6 +41,11 @@ dependencies {
 }
 
 loom {
+	accessWidenerPath = sc.process(
+		rootProject.file("src/main/resources/fontrast.classtweaker"),
+		"build/processed.classtweaker"
+	)
+
 	runConfigs.all {
 		runDir = "../../run"
 	}

@@ -8,7 +8,8 @@
     "FontMixin_Basic",
     "GlyphInstanceMixin",
     "FontMixin_Advanced",
-    "PreparedTextBuilderMixin_Advanced"
+    "PreparedTextBuilderMixin_Advanced",
+    "FontSetMixin"
   ],
   "injectors": {
     "defaultRequire": 1

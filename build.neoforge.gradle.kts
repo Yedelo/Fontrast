@@ -1,10 +1,12 @@
 @file:OptIn(StonecutterExperimentalAPI::class)
 
 import dev.kikugie.stonecutter.StonecutterExperimentalAPI
+import jdk.jfr.internal.JVM.exclude
 import org.gradle.api.tasks.Copy
 import org.gradle.kotlin.dsl.invoke
 import kotlin.reflect.KProperty
 import me.modmuss50.mpp.ReleaseType
+import sun.tools.jar.resources.jar
 
 plugins {
 	id("net.neoforged.moddev") version "2.0.140"
@@ -90,6 +92,10 @@ tasks {
 	jar {
 		archiveFileName.set(finalFileName)
 	}
+}
+
+tasks.named("createMinecraftArtifacts") {
+	dependsOn("stonecutterGenerate")
 }
 
 publishMods {
