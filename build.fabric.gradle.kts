@@ -117,7 +117,6 @@ publishMods {
 
 		requires("fabric-api")
 		requires("yacl")
-		optional("modmenu")
 	}
 }
 
