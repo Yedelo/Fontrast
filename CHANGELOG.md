@@ -1,3 +1,3 @@
-## **1.1.0**
+## **1.1.1**
 
-- Add use legacy obfuscation
+- Added OneConfig mod toggle support
