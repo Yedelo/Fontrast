@@ -2,11 +2,7 @@
 
 ![logo](src/main/resources/assets/fontrast/fontrast.png)
 
-![discord yedel](https://img.shields.io/badge/discord-yedel-blue)
-
-![github release version](https://img.shields.io/github/v/release/Yedelo/Fontrast?include_prereleases&label=github)
-
-![modrinth latest version](https://img.shields.io/modrinth/v/U3ihDy6v?label=modrinth)
+![github release version](https://img.shields.io/github/v/release/Yedelo/Fontrast?include_prereleases&label=github) ![modrinth latest version](https://img.shields.io/modrinth/v/U3ihDy6v?label=modrinth) ![curseforge latest version](https://img.shields.io/curseforge/v/1742042?label=curseforge) ![discord yedel](https://img.shields.io/badge/discord-yedel-purple)
 
 Adds numerous ways to customize the look of text
 
