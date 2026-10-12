@@ -30,6 +30,7 @@ val javaVersion by CommonProperty<JavaVersion>()
 val yaclVersion by CommonProperty<String>()
 val finalFileName by CommonProperty<String>()
 val versionType: String by project
+val minecraftTarget by CommonProperty<String>()
 val modrinthReadme by CommonProperty<String>()
 val license: String by project
 
@@ -105,7 +106,7 @@ publishMods {
 	modLoaders.add("neoforge")
 
 	modrinth {
-		displayName.set("${project.version.toString()} for NeoForge ${sc.current.version}")
+		displayName.set("Fontrast ${project.version.toString()} for NeoForge $minecraftTarget")
 		accessToken = System.getenv("MODRINTH_TOKEN")
 		projectId.set("U3ihDy6v")
 		environment = CLIENT_ONLY
@@ -122,6 +123,26 @@ publishMods {
 
 		requires("yacl")
 	}
+
+    curseforge {
+        displayName.set("Fontrast ${project.version.toString()} for NeoForge $minecraftTarget")
+        accessToken.set(providers.environmentVariable("CURSEFORGE_TOKEN"))
+        projectId.set("1742042")
+        if (rangedVersion) {
+            minecraftVersionRange {
+                start = sc.current.version
+                end = maxMc
+            }
+        }
+        else {
+            minecraftVersions.add(sc.current.version)
+        }
+        javaVersions.add(javaVersion)
+        client.set(true)
+        projectSlug.set("fontrast")
+        requires("yacl")
+        changelogType.set("markdown")
+    }
 }
 
 java {
