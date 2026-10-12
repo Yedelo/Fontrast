@@ -14,6 +14,7 @@ plugins {
 repositories {
 	maven("https://maven.terraformersmc.com/releases/")
 	maven("https://maven.isxander.dev/releases")
+	maven("https://repo.polyfrost.org/releases/")
 }
 
 // in stonecutter.gradle.kts
@@ -25,6 +26,7 @@ val rangedVersion by CommonProperty<Boolean>()
 val maxMc by CommonProperty<String?>()
 val javaVersion by CommonProperty<JavaVersion>()
 val yaclVersion by CommonProperty<String>()
+val modTogglesVersion by CommonProperty<String>()
 val finalFileName by CommonProperty<String>()
 val versionType: String by project
 val modrinthReadme by CommonProperty<String>()
@@ -38,6 +40,7 @@ dependencies {
 
 	modApi("com.terraformersmc:modmenu:${property("versions.modMenu")}")
 	modImplementation("dev.isxander:yet-another-config-lib:$yaclVersion")
+	compileOnly("org.polyfrost.oneconfig:mod-toggles:$modTogglesVersion")
 }
 
 loom {

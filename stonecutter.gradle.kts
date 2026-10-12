@@ -43,6 +43,7 @@ stonecutter parameters {
         val rawVersionProperty = properties.get<String>("versions.yacl")
         if (rawVersionProperty.endsWith(loader)) rawVersionProperty else "$rawVersionProperty+${current.project}"
     })
+    val modTogglesVersion by Declare(properties.get<String>("versions.modToggles"))
 
     val javaVersion by Declare(run {
         val mc = current.parsed

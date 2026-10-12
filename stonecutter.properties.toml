@@ -2,6 +2,7 @@ versions.fabricLoader = "0.19.3"
 versions.fancyModLoader = "4.0.43"
 versions.neoforgeMixin = "0.17.1+mixin.0.8.7"
 versions.mixinExtras = "0.5.4"
+versions.modToggles = "1.0.0"
 
 ["26.1-fabric"]
 versioning = "range"

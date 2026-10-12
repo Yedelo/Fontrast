@@ -21,6 +21,9 @@
     ],
     "modmenu": [
       "at.yedel.fontrast.utils.FontrastModMenu"
+    ],
+    "oneconfig:toggle": [
+      "at.yedel.fontrast.utils.FontrastModToggle"
     ]
   },
   "mixins": [
