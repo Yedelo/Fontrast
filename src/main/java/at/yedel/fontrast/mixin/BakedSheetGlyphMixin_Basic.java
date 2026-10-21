@@ -6,13 +6,12 @@ import at.yedel.fontrast.config.FontrastConfig;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.minecraft.client.gui.font.glyphs.BakedSheetGlyph;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 
 
 
 @Mixin(BakedSheetGlyph.class)
-public abstract class BakedSheetGlyphMixin {
+public abstract class BakedSheetGlyphMixin_Basic {
     @ModifyExpressionValue(method = "left", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/chat/Style;isBold()Z"))
     private boolean fontrast$isBold$left(boolean original) {
         return FontrastConfig.getInstance().isBold(original);
