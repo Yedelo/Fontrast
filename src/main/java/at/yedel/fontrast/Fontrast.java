@@ -4,8 +4,9 @@ package at.yedel.fontrast;
 
 import at.yedel.fontrast.config.FontrastConfig;
 /*? if fabric {*/
+import at.yedel.fontrast.utils.InvocationTracker;
 import net.fabricmc.api.ClientModInitializer;
-/*?} else if neoforge {*/
+    /*?} else if neoforge {*/
 /*import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
@@ -21,6 +22,7 @@ public class Fontrast /*? if fabric {*/implements ClientModInitializer/*?}*/ {
 	@Override
 	public void onInitializeClient() {
 		FontrastConfig.init();
+		InvocationTracker.init();
 	}
 	/*?} elif neoforge {*/
 	/*public Fontrast(ModContainer container) {

@@ -2,6 +2,7 @@ package at.yedel.fontrast.config;
 
 
 
+import at.yedel.fontrast.utils.InvocationTracker;
 import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
@@ -38,6 +39,7 @@ public class FontrastConfig {
         .build();
 
     public static FontrastConfig getInstance() {
+        InvocationTracker.increment();
         return HANDLER.instance();
     }
 
