@@ -122,7 +122,6 @@ publishMods {
 	}
 
 	curseforge {
-		displayName.set("Fontrast ${project.version.toString()} for Fabric $minecraftTarget")
 		accessToken.set(providers.environmentVariable("CURSEFORGE_TOKEN"))
 		projectId.set("1742042")
 		if (rangedVersion) {
