@@ -10,6 +10,7 @@ import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
 import dev.isxander.yacl3.api.controller.IntegerFieldControllerBuilder;
 import dev.isxander.yacl3.api.controller.NumberFieldControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
+import dev.isxander.yacl3.gui.controllers.slider.FloatSliderController;
 import dev.isxander.yacl3.gui.controllers.string.number.NumberFieldController;
 import dev.isxander.yacl3.impl.controller.BooleanControllerBuilderImpl;
 import net.minecraft.network.chat.Component;
@@ -24,6 +25,7 @@ public class TextStyleControl {
     @SerialEntry public ControlOption strikethroughControl = ControlOption.DEFAULT;
     @SerialEntry public ControlOption underlineControl = ControlOption.DEFAULT;
     @SerialEntry public ControlOption obfuscationControl = ControlOption.DEFAULT;
+    @SerialEntry public float strikethroughOpacity = 1f;
     @SerialEntry public boolean useLegacyObfuscation = false;
     @SerialEntry public int maxObfuscationPasses = 10;
 
@@ -84,6 +86,22 @@ public class TextStyleControl {
                     (obfuscationControl) -> control.obfuscationControl = obfuscationControl
                 )
                 .controller(ControlOption.controller())
+                .build()
+            )
+            .group(OptionGroup.createBuilder()
+                .name(Component.literal("Strikethrough"))
+                .description(OptionDescription.of(Component.literal("Control the look and functionality of strikethrough text.")))
+                .option(Option.<Float>createBuilder()
+                    .name(Component.literal("Strikethrough Opacity"))
+                    .description(OptionDescription.of(Component.literal("Changes the opacity of the strikethrough line.")))
+                    .binding(
+                        defaults.strikethroughOpacity,
+                        () -> control.strikethroughOpacity,
+                        (strikethroughOpacity) -> control.strikethroughOpacity = strikethroughOpacity
+                    )
+                    .customController((option) -> new FloatSliderController(option, 0f, 1f, 0.01f))
+                    .build()
+                )
                 .build()
             )
             .group(OptionGroup.createBuilder()

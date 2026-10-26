@@ -4,16 +4,12 @@ package at.yedel.fontrast.mixin;
 
 import at.yedel.fontrast.config.FontrastConfig;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import com.llamalad7.mixinextras.sugar.Local;
-import net.minecraft.client.gui.Font;
 import net.minecraft.network.chat.Style;
+import net.minecraft.util.ARGB;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Coerce;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 
@@ -52,5 +48,21 @@ public abstract class PreparedTextBuilderMixin_Basic {
     @ModifyArg(method = "getShadowColor", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/ARGB;scaleRGB(IF)I"), index = 1)
     private float fontrast$getShadowScale(float original) {
         return FontrastConfig.getInstance().getShadowScale(original);
+    }
+
+    @ModifyArg(method = "accept(ILnet/minecraft/network/chat/Style;Lnet/minecraft/client/gui/font/glyphs/BakedGlyph;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/font/glyphs/EffectGlyph;createEffect(FFFFFIIF)Lnet/minecraft/client/gui/font/TextRenderable;", ordinal = 0), index = 5)
+    private int fontrast$customStrikethroughOpacity$text(int i) {
+        if (FontrastConfig.getInstance().enabled) {
+            return ARGB.multiplyAlpha(i, FontrastConfig.getInstance().textStyleControl.strikethroughOpacity);
+        }
+        return i;
+    }
+
+    @ModifyArg(method = "accept(ILnet/minecraft/network/chat/Style;Lnet/minecraft/client/gui/font/glyphs/BakedGlyph;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/font/glyphs/EffectGlyph;createEffect(FFFFFIIF)Lnet/minecraft/client/gui/font/TextRenderable;", ordinal = 0), index = 6)
+    private int fontrast$customStrikethroughOpacity$shadow(int i) {
+        if (FontrastConfig.getInstance().enabled) {
+            return ARGB.multiplyAlpha(i, FontrastConfig.getInstance().textStyleControl.strikethroughOpacity);
+        }
+        return i;
     }
 }
