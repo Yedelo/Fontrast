@@ -1,3 +1,3 @@
-## **1.1.1**
+## **1.2.0**
 
-- Added OneConfig mod toggle support
+- Added strikethrough opacity
