@@ -9,8 +9,7 @@
     "GlyphInstanceMixin",
     "FontMixin_Advanced",
     "PreparedTextBuilderMixin_Advanced",
-    "FontSetMixin",
-    "DebugScreenEntriesInvoker"
+    "FontSetMixin"
   ],
   "injectors": {
     "defaultRequire": 1
