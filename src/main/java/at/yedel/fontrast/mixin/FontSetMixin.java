@@ -3,15 +3,17 @@ package at.yedel.fontrast.mixin;
 
 
 import at.yedel.fontrast.config.FontrastConfig;
+import at.yedel.fontrast.utils.TargettedGlyphInfo;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.ModifyReceiver;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.font.GlyphProvider;
 import com.mojang.blaze3d.font.UnbakedGlyph;
 import it.unimi.dsi.fastutil.ints.*;
 import net.minecraft.client.gui.font.FontSet;
+import net.minecraft.client.gui.font.glyphs.BakedGlyph;
 import net.minecraft.util.Mth;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -29,7 +31,10 @@ public abstract class FontSetMixin {
 
     @Inject(method = "lambda$selectProviders$0", at = @At(value = "INVOKE", target = "Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;computeIfAbsent(ILit/unimi/dsi/fastutil/ints/Int2ObjectFunction;)Ljava/lang/Object;"))
     private void fontrast$storeLegacyObfuscationMap(List<GlyphProvider> selectedProviders, Set usedProviders, int codepoint, CallbackInfo ci, @Local UnbakedGlyph glyph) {
-        fontrast$legacyGlyphCharacters.codePoints().forEach((legacyGlyphCodepoint) -> {
+        String characterSet =
+            FontrastConfig.getInstance().enabled && FontrastConfig.getInstance().textStyleControl.useCustomObfuscationCharacters ?
+                FontrastConfig.getInstance().textStyleControl.customObfuscationCharacters : fontrast$legacyGlyphCharacters;
+        characterSet.codePoints().forEach((legacyGlyphCodepoint) -> {
             if (codepoint == legacyGlyphCodepoint) {
                 (fontrast$legacyGlyphsByWidth.computeIfAbsent(Mth.ceil(glyph.info().getAdvance(false)), (w) -> new IntArrayList())).add(codepoint);
             }
@@ -40,6 +45,14 @@ public abstract class FontSetMixin {
     private Int2ObjectMap<IntList> fontrast$useLegacyObfuscation(Int2ObjectMap<IntList> original, int i) {
         if (FontrastConfig.getInstance().enabled && FontrastConfig.getInstance().textStyleControl.useLegacyObfuscation) {
             return fontrast$legacyGlyphsByWidth;
+        }
+        return original;
+    }
+
+    @ModifyExpressionValue(method = "getRandomGlyph", at = @At(value = "FIELD", target = "Lnet/minecraft/client/gui/font/FontSet;missingGlyph:Lnet/minecraft/client/gui/font/glyphs/BakedGlyph;"))
+    private BakedGlyph fontrast$useUnobfuscatedFallback(BakedGlyph original) {
+        if (FontrastConfig.getInstance().enabled && FontrastConfig.getInstance().textStyleControl.useUnobfuscatedFallback) {
+            return TargettedGlyphInfo.targettedGlyph;
         }
         return original;
     }
