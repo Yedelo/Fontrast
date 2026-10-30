@@ -23,6 +23,8 @@ Adds numerous ways to customize the look of text
 - Obfuscation Control
 - Strikethrough Opacity
 - Use Legacy Obfuscation
+- Use Custom Obfuscation Characters
+- Use Unobfuscated Fallback
 
 </details>
 
