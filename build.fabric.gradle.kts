@@ -122,6 +122,7 @@ publishMods {
 	}
 
 	curseforge {
+		displayName.set(project.version.toString())
 		accessToken.set(providers.environmentVariable("CURSEFORGE_TOKEN"))
 		projectId.set("1742042")
 		if (rangedVersion) {
