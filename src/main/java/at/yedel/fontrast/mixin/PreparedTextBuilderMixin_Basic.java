@@ -17,22 +17,6 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 @Mixin(targets = "net.minecraft.client.gui.Font$PreparedTextBuilder")
 public abstract class PreparedTextBuilderMixin_Basic {
     @Unique private int fontrast$textColor;
-    @Shadow protected abstract int getShadowColor(Style style, int textColor);
-
-    @ModifyExpressionValue(method = "accept(ILnet/minecraft/network/chat/Style;Lnet/minecraft/client/gui/font/glyphs/BakedGlyph;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/chat/Style;isBold()Z"))
-    private boolean fontrast$isBold(boolean original) {
-        return FontrastConfig.getInstance().isBold(original);
-    }
-
-    @ModifyExpressionValue(method = "accept(ILnet/minecraft/network/chat/Style;Lnet/minecraft/client/gui/font/glyphs/BakedGlyph;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/chat/Style;isStrikethrough()Z"))
-    private boolean fontrast$isStrikethrough(boolean original) {
-        return FontrastConfig.getInstance().isStrikethrough(original);
-    }
-
-    @ModifyExpressionValue(method = "accept(ILnet/minecraft/network/chat/Style;Lnet/minecraft/client/gui/font/glyphs/BakedGlyph;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/chat/Style;isUnderlined()Z"))
-    private boolean fontrast$isUnderlined(boolean original) {
-        return FontrastConfig.getInstance().isUnderlined(original);
-    }
 
     @ModifyExpressionValue(method = "accept(ILnet/minecraft/network/chat/Style;Lnet/minecraft/client/gui/font/glyphs/BakedGlyph;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Font$PreparedTextBuilder;getTextColor(Lnet/minecraft/network/chat/TextColor;)I"))
     private int fontrast$getTextColor(int original) {

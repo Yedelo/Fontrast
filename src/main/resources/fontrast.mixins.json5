@@ -4,14 +4,15 @@
   "compatibilityLevel": "${mixinJava}",
   "client": [
     "PreparedTextBuilderMixin_Basic",
-    "BakedSheetGlyphMixin_Basic",
     "FontMixin_Basic",
-    "GlyphInstanceMixin",
     "FontMixin_Advanced",
     "PreparedTextBuilderMixin_Advanced",
     "FontSetMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "mixins": [
+    "StyleMixin"
+  ]
 }
