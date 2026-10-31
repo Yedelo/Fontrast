@@ -24,7 +24,6 @@ Adds numerous ways to customize the look of text
 - Strikethrough Opacity
 - Use Legacy Obfuscation
 - Use Custom Obfuscation Characters
-- Use Unobfuscated Fallback
 
 </details>
 

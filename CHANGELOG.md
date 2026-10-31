@@ -1,7 +1,3 @@
-## **1.3.0**
+## **1.3.1**
 
-- Fix compatibility with Polydium
-- Rewrote legacy obfuscation to use the modern obfuscation method but with legacy characters
-- Added custom obfuscation characters
-- Added use unobfuscated fallback
-- Target Style methods for text style control
+- Add notice and safety with quick-pack and legacy obfuscation
