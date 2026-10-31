@@ -43,7 +43,7 @@ public abstract class FontSetMixin {
 
     @ModifyReceiver(method = "getRandomGlyph", at = @At(value = "INVOKE", target = "Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;get(I)Ljava/lang/Object;"))
     private Int2ObjectMap<IntList> fontrast$useLegacyObfuscation(Int2ObjectMap<IntList> original, int i) {
-        if (FontrastConfig.getInstance().enabled && FontrastConfig.getInstance().textStyleControl.useLegacyObfuscation) {
+        if (FontrastConfig.getInstance().enabled && FontrastConfig.getInstance().textStyleControl.useLegacyObfuscation && !fontrast$legacyGlyphsByWidth.isEmpty()) {
             return fontrast$legacyGlyphsByWidth;
         }
         return original;
