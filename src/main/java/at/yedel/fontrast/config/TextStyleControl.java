@@ -23,6 +23,7 @@ import net.minecraft.network.chat.MutableComponent;
 
 
 public class TextStyleControl {
+    //~ if neoforge 'quick-pack' -> 'quick_pack'
     //~ if neoforge 'FabricLoader.getInstance().isModLoaded' -> 'ModList.get().isLoaded'
     private static final boolean QUICK_PACK_LOADED = FabricLoader.getInstance().isModLoaded("quick-pack");
     private static final OptionDescription USE_LEGACY_OBFUSCATION_DESCRIPTION;
