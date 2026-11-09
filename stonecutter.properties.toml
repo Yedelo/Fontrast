@@ -15,3 +15,9 @@ versioning = "range"
 mc.max = "26.3"
 versions.neoforge = "26.1.0.19-beta"
 versions.yacl = "3.9.4"
+
+["1.21.11-fabric"]
+versioning = "single"
+versions.fabricApi = "0.141.3+1.21.11"
+versions.modMenu = "17.0.0"
+versions.yacl = "3.8.2"
