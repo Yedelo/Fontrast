@@ -1,3 +1,3 @@
-## **1.3.1**
+## **1.4.0**
 
-- Add notice and safety with quick-pack and legacy obfuscation
+- Add 1.21.11 fabric support
