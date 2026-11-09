@@ -81,7 +81,7 @@ public class FontrastConfig {
                     .option(ButtonOption.createBuilder()
                         .name(Component.literal("Show Formatting Guide"))
                         .description(OptionDescription.of(FORMATTING_GUIDE))
-                        .action((_, _) -> {})
+                        .action((screen_, option_) -> {})
                         // ts says "EXECUTE" by default 😭😭😭
                         .text(Component.literal("Hover"))
                         .build()
