@@ -3,11 +3,12 @@ package at.yedel.fontrast.mixin;
 
 
 import at.yedel.fontrast.config.FontrastConfig;
+import com.llamalad7.mixinextras.expression.Definition;
+import com.llamalad7.mixinextras.expression.Expression;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import net.minecraft.network.chat.Style;
+import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.util.ARGB;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
@@ -22,6 +23,16 @@ public abstract class PreparedTextBuilderMixin_Basic {
     private int fontrast$getTextColor(int original) {
         fontrast$textColor = original;
         return FontrastConfig.getInstance().getTextColor(original);
+    }
+
+    @Definition(id = "shadow", local = @Local(type = Integer.class))
+    @Expression("shadow != null")
+    @ModifyExpressionValue(method = "getShadowColor", at = @At("MIXINEXTRAS:EXPRESSION"))
+    private boolean fontrast$disableCustomShadowColors(boolean original) {
+        if (FontrastConfig.getInstance().enabled && FontrastConfig.getInstance().textColorControl.disableCustomShadowColors) {
+            return false;
+        }
+        return original;
     }
 
     @ModifyExpressionValue(method = "accept(ILnet/minecraft/network/chat/Style;Lnet/minecraft/client/gui/font/glyphs/BakedGlyph;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Font$PreparedTextBuilder;getShadowColor(Lnet/minecraft/network/chat/Style;I)I"))

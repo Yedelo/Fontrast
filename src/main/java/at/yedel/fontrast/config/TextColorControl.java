@@ -20,6 +20,7 @@ public class TextColorControl {
     @SerialEntry boolean multiplyColors = false;
     @SerialEntry int colorMultiplier = 0xFFFFFFFF;
     @SerialEntry public float shadowScale = 0.25f;
+    @SerialEntry public boolean disableCustomShadowColors = false;
     @SerialEntry CustomColors customTextColors = new CustomColors(false);
     @SerialEntry CustomColors customShadowColors = new CustomColors(true);
 
@@ -60,6 +61,17 @@ public class TextColorControl {
                         (shadowScale) -> control.shadowScale = shadowScale
                     )
                     .customController((option) -> new FloatSliderController(option, 0f, 1f, 0.01f))
+                    .build()
+                )
+                .option(Option.<Boolean>createBuilder()
+                    .name(Component.literal("Disable Custom Shadow Colors"))
+                    .description(OptionDescription.of(Component.literal("Disables custom shadow colors attached to components.")))
+                    .binding(
+                        defaults.disableCustomShadowColors,
+                        () -> control.disableCustomShadowColors,
+                        (disableCustomShadowColors) -> control.disableCustomShadowColors = disableCustomShadowColors
+                    )
+                    .controller(BooleanControllerBuilder::create)
                     .build()
                 )
                 .build()
