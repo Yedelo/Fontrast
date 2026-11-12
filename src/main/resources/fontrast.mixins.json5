@@ -15,5 +15,8 @@
   "mixins": [
     "StyleMixin"
   ],
-  "verbose": true
+  "verbose": true,
+  "mixinextras": {
+    "minVersion": "0.5.5"
+  }
 }
