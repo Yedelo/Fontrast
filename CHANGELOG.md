@@ -1,3 +1,3 @@
-## **1.4.0**
+## **1.5.0**
 
-- Add 1.21.11 fabric support
+- Add disable custom shadow colors

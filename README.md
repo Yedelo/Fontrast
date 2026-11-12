@@ -31,6 +31,7 @@ Adds numerous ways to customize the look of text
 
 - Multiply Colors
 - Shadow Scale
+- Disable Custom Shadow Colors
 - Custom Text Colors
 - Custom Shadow Colors
 
