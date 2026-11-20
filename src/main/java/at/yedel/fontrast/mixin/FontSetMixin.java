@@ -35,6 +35,7 @@ public abstract class FontSetMixin {
         return FontrastConfig.getInstance().modifyCodepoint(codepoint);
     }
 
+    //@TODO fix incompatibility with quick-pack (uses overwrite)
     @Inject(method = {"method_57035", "lambda$selectProviders$0"}, at = @At(value = "INVOKE", target = "Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;computeIfAbsent(ILit/unimi/dsi/fastutil/ints/Int2ObjectFunction;)Ljava/lang/Object;"))
     private void fontrast$storeLegacyObfuscationMap(List<GlyphProvider> selectedProviders, Set usedProviders, int codepoint, CallbackInfo ci, @Local UnbakedGlyph glyph) {
         String characterSet =
