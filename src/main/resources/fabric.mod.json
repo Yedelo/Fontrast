@@ -16,6 +16,9 @@
   "icon": "assets/fontrast/fontrast.png",
   "environment": "client",
   "entrypoints": {
+    "main": [
+      "at.yedel.fontrast.modblocks.ModBlocks"
+    ],
     "client": [
       "at.yedel.fontrast.Fontrast"
     ],
