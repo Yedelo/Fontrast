@@ -96,6 +96,16 @@ public class FontrastConfig {
         ).generateScreen(parent);
     }
 
+    public int modifyCodepoint(int codepoint) {
+        if (FontrastConfig.getInstance().enabled) {
+            switch (FontrastConfig.getInstance().textStyleControl.casingControl) {
+                case LOWERCASE: return Character.toLowerCase(codepoint);
+                case UPPERCASE: return Character.toUpperCase(codepoint);
+            }
+        }
+        return codepoint;
+    }
+
     public boolean isBold(boolean original) {
         if (enabled) {
             return textStyleControl.boldControl.shouldApply(original);

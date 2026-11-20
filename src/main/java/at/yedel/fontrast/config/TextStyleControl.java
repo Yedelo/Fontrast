@@ -27,6 +27,7 @@ public class TextStyleControl {
     //~ if neoforge 'FabricLoader.getInstance().isModLoaded' -> 'ModList.get().isLoaded'
     private static final boolean QUICK_PACK_LOADED = FabricLoader.getInstance().isModLoaded("quick-pack");
     private static final OptionDescription USE_LEGACY_OBFUSCATION_DESCRIPTION;
+    @SerialEntry public CasingOption casingControl = CasingOption.DEFAULT;
     @SerialEntry public ControlOption boldControl = ControlOption.DEFAULT;
     @SerialEntry public ControlOption italicControl = ControlOption.DEFAULT;
     @SerialEntry public ControlOption strikethroughControl = ControlOption.DEFAULT;
@@ -52,6 +53,17 @@ public class TextStyleControl {
         return ConfigCategory.createBuilder()
             .name(Component.literal("Text Style Control"))
             .tooltip(Component.literal("Control the style of text."))
+            .option(Option.<CasingOption>createBuilder()
+                .name(Component.literal("Casing Control"))
+                .description(OptionDescription.of(Component.literal("Controls the casing of text.")))
+                .binding(
+                    defaults.casingControl,
+                    () -> control.casingControl,
+                    (casingControl) -> control.casingControl = casingControl
+                )
+                .controller(CasingOption.controller())
+                .build()
+            )
             .option(Option.<ControlOption>createBuilder()
                 .name(Component.literal("Bold Control"))
                 .description(OptionDescription.of(Component.literal("Controls the bold style on text.")))
