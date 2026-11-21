@@ -16,6 +16,7 @@ Adds numerous ways to customize the look of text
 
 <details><summary>Text Style Control</summary>
 
+- Replace Tiny Caps
 - Casing Control
 - Bold Control
 - Italic Control
