@@ -18,10 +18,13 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
 
 import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.Map;
 
 
 
 public class FontrastConfig {
+    private static final Map<Integer, Integer> TINY_CAPS_REPLACEMENTS = new HashMap<>();
     /*? if fabric {*/
     private static final Path CONFIG_FILE_PATH = FabricLoader.getInstance().getConfigDir().resolve("fontrast.json");
     /*?} else if neoforge {*/
@@ -39,6 +42,14 @@ public class FontrastConfig {
 
     public static FontrastConfig getInstance() {
         return HANDLER.instance();
+    }
+
+    static {
+        String tinyCaps = "ᴀʙᴄᴅᴇꜰɢʜɪᴊᴋʟᴍɴᴏᴘǫʀꜱᴛᴜᴠᴡʏᴢ";
+        String regularCaps = "ABCDEFGHIJKLMNOPQRSTUVWYZ";
+        for (int i = 0; i < tinyCaps.length(); i ++) {
+            TINY_CAPS_REPLACEMENTS.put(tinyCaps.codePointAt(i), regularCaps.codePointAt(i));
+        }
     }
 
     public static void init() {
@@ -98,10 +109,15 @@ public class FontrastConfig {
 
     public int modifyCodepoint(int codepoint) {
         if (FontrastConfig.getInstance().enabled) {
-            switch (FontrastConfig.getInstance().textStyleControl.casingControl) {
-                case LOWERCASE: return Character.toLowerCase(codepoint);
-                case UPPERCASE: return Character.toUpperCase(codepoint);
+            int modified = codepoint;
+            if (FontrastConfig.getInstance().textStyleControl.replaceTinyCaps && TINY_CAPS_REPLACEMENTS.containsKey(modified)) {
+                modified = TINY_CAPS_REPLACEMENTS.get(modified);
             }
+            switch (FontrastConfig.getInstance().textStyleControl.casingControl) {
+                case LOWERCASE: modified = Character.toLowerCase(modified); break;
+                case UPPERCASE: modified = Character.toUpperCase(modified);
+            }
+            return modified;
         }
         return codepoint;
     }

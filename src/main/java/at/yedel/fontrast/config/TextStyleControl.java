@@ -27,6 +27,7 @@ public class TextStyleControl {
     //~ if neoforge 'FabricLoader.getInstance().isModLoaded' -> 'ModList.get().isLoaded'
     private static final boolean QUICK_PACK_LOADED = FabricLoader.getInstance().isModLoaded("quick-pack");
     private static final OptionDescription USE_LEGACY_OBFUSCATION_DESCRIPTION;
+    @SerialEntry public boolean replaceTinyCaps = false;
     @SerialEntry public CasingOption casingControl = CasingOption.DEFAULT;
     @SerialEntry public ControlOption boldControl = ControlOption.DEFAULT;
     @SerialEntry public ControlOption italicControl = ControlOption.DEFAULT;
@@ -53,6 +54,17 @@ public class TextStyleControl {
         return ConfigCategory.createBuilder()
             .name(Component.literal("Text Style Control"))
             .tooltip(Component.literal("Control the style of text."))
+            .option(Option.<Boolean>createBuilder()
+                .name(Component.literal("Replace Tiny Caps"))
+                .description(OptionDescription.of(Component.literal("Replace tiny caps characters (ᴀʙᴄᴅᴇꜰɢʜɪᴊᴋʟᴍɴᴏᴘǫʀꜱᴛᴜᴠᴡʏᴢ) with regular characters.")))
+                .binding(
+                    defaults.replaceTinyCaps,
+                    () -> control.replaceTinyCaps,
+                    (replaceTinyCaps) -> control.replaceTinyCaps = replaceTinyCaps
+                )
+                .controller(BooleanControllerBuilder::create)
+                .build()
+            )
             .option(Option.<CasingOption>createBuilder()
                 .name(Component.literal("Casing Control"))
                 .description(OptionDescription.of(Component.literal("Controls the casing of text.")))
